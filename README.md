@@ -172,10 +172,8 @@ llm = init_chat_model("openai:meta-llama/llama-3.1-405b-instruct", base_url="htt
 |---------|---------|------|
 | [Build a Basic Chatbot](https://langchain-ai.github.io/langgraph/tutorials/introduction/) | `00_basic_chatbot_tutorial.ipynb` | ✅ 已完成 |
 | [Add Tools](https://langchain-ai.github.io/langgraph/tutorials/introduction/) | `01_tool_calling_chatbot_tutorial.ipynb` | ✅ 已完成 |
-| Memory-enabled Chatbot | `02_memory_chatbot.ipynb` | 🚧 计划中 |
+| [Add Memory](https://langchain-ai.github.io/langgraph/tutorials/get-started/3-add-memory/) | `02_memory_chatbot.ipynb` | ✅ 已完成 |
 | Multi-agent System | `03_multi_agent_system.ipynb` | 🚧 计划中 |
-
-## 📄 许可证
 
 本项目基于 MIT 许可证开源，主要用于学习和交流目的。
 
