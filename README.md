@@ -24,11 +24,12 @@
 - **多模型支持**：通过 OpenRouter 访问多种 LLM 模型（GPT-4、Claude、Llama 等）
 
 ### 📊 学习进度追踪
-- [x] **00: 基础 Chatbot** - LangGraph 入门教程
-- [x] **01: Tool-calling Chatbot** - 集成外部工具
-- [ ] **02: Memory-enabled Chatbot** - 添加记忆功能
-- [ ] **03: Multi-agent System** - 多智能体协作
-- [ ] **04: Custom Workflows** - 自定义工作流
+- [x] **00: 基础聊天机器人 (Basic Chatbot)** - LangGraph 入门教程
+- [x] **01: 工具调用聊天机器人 (Tool-calling Chatbot)** - 集成外部工具
+- [x] **02: 记忆功能聊天机器人 (Memory-enabled Chatbot)** - 添加持久化记忆
+- [x] **03: 人机交互控制 (Human-in-the-Loop)** - 添加人工干预机制
+- [ ] **04: 自定义状态管理 (Custom State)** - 复杂状态字段管理
+- [ ] **05: 多智能体系统 (Multi-agent System)** - 多智能体协作
 
 ## 📁 项目结构
 
@@ -37,12 +38,12 @@ langchain_study/
 ├── README.md                               # 项目介绍（本文件）
 ├── .env.example                            # 环境变量配置模板
 ├── .gitignore                              # Git 忽略文件配置
-├── 00_basic_chatbot_tutorial.ipynb        # 00: 基础 Chatbot 教程
-├── 01_tool_calling_chatbot_tutorial.ipynb # 01: Tool-calling 教程
-├── notebooks/                              # 更多教程 Notebooks
-│   ├── 02_memory_chatbot.ipynb            # 02: Memory 功能教程
-│   └── 03_multi_agent_system.ipynb       # 03: 多智能体教程
-└── docs/                                   # 学习笔记和文档
+├── test_api.py                             # API 连接测试脚本
+├── 00_basic_chatbot_tutorial.ipynb        # 00: 基础聊天机器人教程
+├── 01_tool_calling_chatbot_tutorial.ipynb # 01: 工具调用聊天机器人教程
+├── 02_memory_chatbot_tutorial.ipynb       # 02: 记忆功能聊天机器人教程
+├── 03_human_in_loop_tutorial.ipynb        # 03: 人机交互控制教程
+└── docs/                                   # 学习笔记和文档（计划中）
     ├── concepts.md                         # 核心概念笔记
     ├── troubleshooting.md                 # 常见问题解决
     └── resources.md                        # 学习资源整理
@@ -73,10 +74,12 @@ cp .env.example .env
 
 ### 运行教程
 
-1. 打开 `00_basic_chatbot_tutorial.ipynb`（基础教程）
-2. 或打开 `01_tool_calling_chatbot_tutorial.ipynb`（工具调用教程）
-3. 按步骤执行每个单元格
-3. 体验从零构建 LangGraph Chatbot 的全过程
+1. **基础入门**：打开 `00_basic_chatbot_tutorial.ipynb`（基础聊天机器人）
+2. **工具集成**：打开 `01_tool_calling_chatbot_tutorial.ipynb`（工具调用）
+3. **记忆功能**：打开 `02_memory_chatbot_tutorial.ipynb`（持久化记忆）
+4. **人机交互**：打开 `03_human_in_loop_tutorial.ipynb`（人工干预控制）
+5. 按步骤执行每个单元格
+6. 体验从零构建完整 LangGraph 应用的全过程
 
 ## 🔧 配置说明
 
@@ -104,7 +107,7 @@ llm = init_chat_model("openai:meta-llama/llama-3.1-405b-instruct", base_url="htt
 
 ### 已完成的模块
 
-#### 00. 基础 Chatbot (✅ 已完成)
+#### 00. 基础聊天机器人 (✅ 已完成)
 - **原教程**：[Build a Basic Chatbot](https://langchain-ai.github.io/langgraph/tutorials/get-started/1-build-basic-chatbot)
 - **中文版本**：`00_basic_chatbot_tutorial.ipynb`
 - **核心概念**：StateGraph、State Management、Nodes、Edges
@@ -118,7 +121,7 @@ llm = init_chat_model("openai:meta-llama/llama-3.1-405b-instruct", base_url="htt
   - Graph 编译和执行流程
   - 多模型支持配置
 
-#### 01. Tool-calling Chatbot (✅ 已完成)
+#### 01. 工具调用聊天机器人 (✅ 已完成)
 - **原教程**：[Add Tools](https://langchain-ai.github.io/langgraph/tutorials/introduction/)
 - **中文版本**：`01_tool_calling_chatbot_tutorial.ipynb`
 - **核心概念**：Tool Integration、Tool Calling、Conditional Edges、ToolNode
@@ -133,6 +136,36 @@ llm = init_chat_model("openai:meta-llama/llama-3.1-405b-instruct", base_url="htt
   - 预构建组件 vs 自定义组件
   - 工具调用的错误处理
 
+#### 02. 记忆功能聊天机器人 (✅ 已完成)
+- **原教程**：[Add Memory](https://langchain-ai.github.io/langgraph/tutorials/get-started/3-add-memory/)
+- **中文版本**：`02_memory_chatbot_tutorial.ipynb`
+- **核心概念**：Checkpointing、Persistence、Thread Management、State Recovery
+- **实践收获**：学会了如何为聊天机器人添加持久化记忆能力
+- **本土化改进**：
+  - 详细的检查点机制中文解释
+  - 多种存储后端的配置示例
+  - 线程管理和状态恢复的实践指导
+- **技术要点**：
+  - `InMemorySaver` 和 `SqliteSaver` 的使用
+  - `thread_id` 的线程管理机制
+  - 不同 `stream_mode` 的区别和应用
+  - 状态快照和历史记录管理
+
+#### 03. 人机交互控制 (✅ 已完成)
+- **原教程**：[Human-in-the-Loop](https://langchain-ai.github.io/langgraph/tutorials/human-in-the-loop/)
+- **中文版本**：`03_human_in_loop_tutorial.ipynb`
+- **核心概念**：Interrupt、Resume、Human Assistance、Command Objects
+- **实践收获**：掌握了在 AI 工作流中集成人工干预和审批机制
+- **本土化改进**：
+  - 中文化的人工协助工具和提示词
+  - 适合中文用户的交互场景设计
+  - 详细的中断/恢复机制中文说明
+- **技术要点**：
+  - `interrupt()` 函数的暂停机制
+  - `Command(resume=...)` 的恢复流程
+  - 条件中断和智能人工协助
+  - 检查点持久化在人机交互中的应用
+
 ### 学习反思
 
 通过这个项目，我深刻体会到：
@@ -144,9 +177,12 @@ llm = init_chat_model("openai:meta-llama/llama-3.1-405b-instruct", base_url="htt
 
 ## 🎯 下一步计划
 
+- [x] **基础聊天机器人**：掌握 LangGraph 的核心架构和基本用法
 - [x] **工具集成**：为 Chatbot 添加网络搜索、计算器等工具
-- [ ] **记忆功能**：实现对话历史记忆和上下文理解
-- [ ] **多智能体**：构建多个 AI Agent 协作的系统
+- [x] **记忆功能**：实现对话历史记忆和上下文理解  
+- [x] **人机交互控制**：添加人工干预和审批机制
+- [ ] **自定义状态管理**：复杂状态字段和数据结构处理
+- [ ] **多智能体系统**：构建多个 AI Agent 协作的系统
 - [ ] **RAG 系统**：结合检索增强生成技术
 - [ ] **生产部署**：将学习成果部署到实际应用中
 
@@ -168,12 +204,14 @@ llm = init_chat_model("openai:meta-llama/llama-3.1-405b-instruct", base_url="htt
 - [LangSmith 调试工具](https://smith.langchain.com/)
 
 ### 教程对照
-| 原版教程 | 中文版本 | 状态 |
-|---------|---------|------|
-| [Build a Basic Chatbot](https://langchain-ai.github.io/langgraph/tutorials/introduction/) | `00_basic_chatbot_tutorial.ipynb` | ✅ 已完成 |
-| [Add Tools](https://langchain-ai.github.io/langgraph/tutorials/introduction/) | `01_tool_calling_chatbot_tutorial.ipynb` | ✅ 已完成 |
-| [Add Memory](https://langchain-ai.github.io/langgraph/tutorials/get-started/3-add-memory/) | `02_memory_chatbot.ipynb` | ✅ 已完成 |
-| Multi-agent System | `03_multi_agent_system.ipynb` | 🚧 计划中 |
+| 序号 | 原版教程 | 中文版本 | 中文标题 | 状态 |
+|------|---------|---------|---------|------|
+| 00 | [Build a Basic Chatbot](https://langchain-ai.github.io/langgraph/tutorials/introduction/) | `00_basic_chatbot_tutorial.ipynb` | 基础聊天机器人 | ✅ 已完成 |
+| 01 | [Add Tools](https://langchain-ai.github.io/langgraph/tutorials/introduction/) | `01_tool_calling_chatbot_tutorial.ipynb` | 工具调用聊天机器人 | ✅ 已完成 |
+| 02 | [Add Memory](https://langchain-ai.github.io/langgraph/tutorials/get-started/3-add-memory/) | `02_memory_chatbot_tutorial.ipynb` | 记忆功能聊天机器人 | ✅ 已完成 |
+| 03 | [Human-in-the-Loop](https://langchain-ai.github.io/langgraph/tutorials/human-in-the-loop/) | `03_human_in_loop_tutorial.ipynb` | 人机交互控制 | ✅ 已完成 |
+| 04 | Custom State Management | `04_custom_state_tutorial.ipynb` | 自定义状态管理 | 🚧 计划中 |
+| 05 | Multi-agent System | `05_multi_agent_system.ipynb` | 多智能体系统 | 🚧 计划中 |
 
 本项目基于 MIT 许可证开源，主要用于学习和交流目的。
 
